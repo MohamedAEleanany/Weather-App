@@ -16,4 +16,5 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## ScreenShot
-![Screenshot_1695144536](https://github.com/MohamedAEleanany/Weather-App/assets/116359570/f8187bb4-3eb9-4dd3-97b2-87b9e46ede6b)
+![Screenshot_1695144536](https://github.com/MohamedAEleanany/Weather-App/assets/116359570/f8187bb4-3eb9-4dd3-97b2-87b9e46ede6b) | weath=200
+
