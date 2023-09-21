@@ -21,13 +21,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      DataCubit(),
+      DataCubit(NoDataState()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: BlocBuilder<DataCubit, states>(
           builder: (context, state) {
             if(state is NoDataState){
-              BlocProvider.of<DataCubit>(context).getData('cairo');
+
               return Center(child: CircularProgressIndicator());
             }else
               return WeatherDataBodyUi();

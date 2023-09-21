@@ -24,22 +24,25 @@ class WeatherDataBodyUi extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TextField(
-              style: TextStyle(color: Colors.white ,fontSize: 18),
-              onSubmitted: (value) {
-                 BlocProvider.of<DataCubit>(context).getData(value);
-              },
-              decoration: InputDecoration(
-                hintText: 'Enter your City',
-                  hintStyle: TextStyle(color: Colors.white54),
-                  labelText: 'City Name',
-                  labelStyle: TextStyle(color: Colors.white54),
-                    focusColor: Colors.white54,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                style: TextStyle(color: Colors.white ,fontSize: 18),
+                onSubmitted: (value) {
+                   BlocProvider.of<DataCubit>(context).getData(value);
+                },
+                decoration: InputDecoration(
+                  hintText: 'Enter your City',
+                    hintStyle: TextStyle(color: Colors.white54),
+                    labelText: 'City Name',
+                    labelStyle: TextStyle(color: Colors.white54),
+                      focusColor: Colors.white54,
 
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white ,)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white))),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white ,)),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white))),
+              ),
             ),
             Padding(
               padding: const EdgeInsetsDirectional.symmetric(horizontal: 10 , vertical: 20),
@@ -49,17 +52,20 @@ class WeatherDataBodyUi extends StatelessWidget {
                    children: [
                      Row(
                        children: [
-                         Icon(Icons.location_on_outlined ,size: 28, color: Colors.white),
-
                          Padding(
                            padding: const EdgeInsets.all(8.0),
-                           child: Text("${weatherModel.location.name}" , style: TextStyle(color: Colors.white , fontSize: 30) , ),
+                           child: Icon(Icons.location_on_outlined ,size: 28, color: Colors.white),
+                         ),
+
+                         Padding(
+                           padding: const EdgeInsets.all(10.0),
+                           child: Text("${weatherModel?.location.name ?? 'no location'}" , style: TextStyle(color: Colors.white , fontSize: 30) , ),
                          ),
                        ],
                      ),
                      Padding(
                        padding: const EdgeInsets.all(8.0),
-                       child: Text("Updated At : ${weatherModel.current.lastUpdated}" , style: TextStyle(color: Colors.white , fontSize: 18) , ),
+                       child: Text("Updated At : ${weatherModel?.current.lastUpdated ?? 'No data found'}" , style: TextStyle(color: Colors.white , fontSize: 18) , ),
                      ),
                      Expanded(
                        child: Row(
@@ -71,10 +77,10 @@ class WeatherDataBodyUi extends StatelessWidget {
                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                children: [
-                                 Text("${weatherModel.forecast.forecastday[0].day.mintempC} C" , style: TextStyle(color: Colors.white , fontSize: 50) , ),
-                                 Text("${weatherModel.forecast.forecastday[0].day.mintempC} C / ${weatherModel.forecast.forecastday[0].day.maxtempC}`C " , style: TextStyle(color: Colors.white , fontSize: 18) , ),
+                                 Text("${weatherModel?.forecast.forecastday[0].day.mintempC ?? 'no data'} C" , style: TextStyle(color: Colors.white , fontSize: 50) , ),
+                                 Text("${weatherModel?.forecast.forecastday[0].day.mintempC ?? ''} C / ${weatherModel?.forecast.forecastday[0].day.maxtempC}`C " , style: TextStyle(color: Colors.white , fontSize: 18) , ),
                                  SizedBox(height: 10,),
-                                 Text("${weatherModel.current.condition.text}" , style: TextStyle(color: Colors.white , fontSize: 18) , ),
+                                 Text("${weatherModel?.current.condition.text ?? ''}" , style: TextStyle(color: Colors.white , fontSize: 18) , ),
                                ],
                              ),
                            ),
@@ -84,7 +90,7 @@ class WeatherDataBodyUi extends StatelessWidget {
                              height: 150,
                              child: Padding(
                                padding: const EdgeInsets.all(16.0),
-                               child: Image(image: NetworkImage('https:${weatherModel.forecast.forecastday[0].day.condition.icon}', ) ,fit: BoxFit.fill,),
+                               child: Image(image: NetworkImage('https:${weatherModel?.forecast.forecastday[0].day.condition.icon}', ) ,fit: BoxFit.fill,),
                              ),
                            )
                          ],
@@ -120,7 +126,7 @@ class WeatherDataBodyUi extends StatelessWidget {
                           SizedBox(width: 10,),
                           Text("Temperature" , style: TextStyle(color: Colors.white54 ,fontSize: 18),),
                           Spacer(),
-                          Text("${weatherModel.forecast.forecastday[0].day.mintempC}'c" , style: TextStyle(color: Colors.white ,fontSize: 20),)
+                          Text("${weatherModel?.forecast.forecastday[0].day.mintempC}'c" , style: TextStyle(color: Colors.white ,fontSize: 20),)
                         ],
                       ),
                     ),
@@ -140,7 +146,7 @@ class WeatherDataBodyUi extends StatelessWidget {
                           SizedBox(width: 10,),
                           Text("Humidity" , style: TextStyle(color: Colors.white54 ,fontSize: 18),),
                           Spacer(),
-                          Text("${weatherModel.current.humidity} %" , style: TextStyle(color: Colors.white ,fontSize: 20),)
+                          Text("${weatherModel?.current.humidity} %" , style: TextStyle(color: Colors.white ,fontSize: 20),)
                         ],
                       ),
                     ),
@@ -160,7 +166,7 @@ class WeatherDataBodyUi extends StatelessWidget {
                           SizedBox(width: 10,),
                           Text("Chance of Rain" , style: TextStyle(color: Colors.white54 ,fontSize: 18),),
                           Spacer(),
-                          Text("${weatherModel.forecast.forecastday[0].day.dailyChanceOfRain} %" , style: TextStyle(color: Colors.white ,fontSize: 20),)
+                          Text("${weatherModel?.forecast.forecastday[0].day.dailyChanceOfRain} %" , style: TextStyle(color: Colors.white ,fontSize: 20),)
                         ],
                       ),
                     ),
@@ -180,7 +186,7 @@ class WeatherDataBodyUi extends StatelessWidget {
                           SizedBox(width: 10,),
                           Text("Wind" , style: TextStyle(color: Colors.white54 ,fontSize: 18),),
                           Spacer(),
-                          Text("${weatherModel.current.windKph} Km/h" , style: TextStyle(color: Colors.white ,fontSize: 20),)
+                          Text("${weatherModel?.current.windKph} Km/h" , style: TextStyle(color: Colors.white ,fontSize: 20),)
                         ],
                       ),
                     ),
@@ -200,7 +206,7 @@ class WeatherDataBodyUi extends StatelessWidget {
                           SizedBox(width: 10,),
                           Text("Pressure" , style: TextStyle(color: Colors.white54 ,fontSize: 18),),
                           Spacer(),
-                          Text("${weatherModel.current.pressureIn} In" , style: TextStyle(color: Colors.white ,fontSize: 20),)
+                          Text("${weatherModel?.current.pressureIn} In" , style: TextStyle(color: Colors.white ,fontSize: 20),)
                         ],
                       ),
                     ),
@@ -220,7 +226,7 @@ class WeatherDataBodyUi extends StatelessWidget {
                           SizedBox(width: 10,),
                           Text("Cloud" , style: TextStyle(color: Colors.white54 ,fontSize: 18),),
                           Spacer(),
-                          Text("${weatherModel.current.cloud}" , style: TextStyle(color: Colors.white ,fontSize: 20),)
+                          Text("${weatherModel?.current.cloud}" , style: TextStyle(color: Colors.white ,fontSize: 20),)
                         ],
                       ),
                     ),
